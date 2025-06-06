@@ -10,10 +10,9 @@ from crewai import LLM
 
 llm = LLM(
     model = "ollama/llama3.2-vision:11b",
-    base_url = "http://localhost:11434"
+    base_url = "http://localhost:11434", 
+    stream=True # Enable Streaming
 )
-
-
 
 @CrewBase
 class Stocksagecrew():
@@ -58,7 +57,6 @@ class Stocksagecrew():
     def explain_task(self) -> Task:
         return Task(
             config=self.tasks_config['explain_task'], # type: ignore[index]
-            output_file='report.md'
         )
 
     @crew
