@@ -1,0 +1,17 @@
+news_scan_task:
+  description: >
+    Scan the latest financial and news of companies in stock market. Pick 3 major 
+    headlines of companies that are relevant and impactful in stock market and is for general people, not traders. 
+    Use the search tool only once. Do not retry unless error. 
+  expected_output: >
+    A list of top 4 news of company headlines with short summary and relevant stock tickers for each. 
+  agent: stock_scanner
+
+explain_task:
+  description: >
+    Convert each headline from the news_scan_task into an easy-to-understand. 
+    Avoid financial jargon. Make it feel like a conversation with a smart friend. 
+    Give idea on whether to buy or sell or hold. 
+  expected_output: >
+    For each headline: A 3-paragraph short explanation of whats happening in companies + 1-2 follow up questions user might ask 
+  agent: stock_explainer
