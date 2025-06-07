@@ -2,7 +2,7 @@ news_scan_task:
   description: >
     Scan the latest news of companies in stock market. 
     Pick only 5 major headlines of companies that are relevant and impactful in stock market and is for general people, not traders. 
-    Use the search tool only once. Give real news happening inside the companies not names of websites or magazines.
+    Use the search tool only once. Search only two websites and give relevant news.
   expected_output: >
     A list of top 5 news of company headlines with short summary and relevant stock tickers for each. 
   agent: stock_scanner

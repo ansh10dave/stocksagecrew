@@ -1,6 +1,6 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from crewai_tools import SerperDevTool 
+from crewai_tools import (SerperDevTool, WebsiteSearchTool)  
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from typing import List
 from crewai import LLM 
@@ -8,10 +8,29 @@ from crewai import LLM
 # you can use the @before_kickoff and @after_kickoff decorators
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
+########### LLM ############################
 llm = LLM(
     model = "ollama/llama3.2-vision:11b",
     base_url = "http://localhost:11434", 
     stream=True # Enable Streaming
+)
+
+########## Websitesearchtool ##############
+tool = WebsiteSearchTool(
+    config = dict(
+        llm = dict(
+            provider="ollama",
+            config = dict(
+                model="llama3.2-vision:11b",
+            ),
+        ),
+        embedder = dict(
+            provider="ollama", 
+            config = dict(
+                model="nomic-embed-text",
+            ),
+        ),
+    )
 )
 
 @CrewBase
@@ -32,7 +51,7 @@ class Stocksagecrew():
         return Agent(
             config=self.agents_config['stock_scanner'], # type: ignore[index]
             verbose=True, 
-            tools=[SerperDevTool()],
+            tools=[SerperDevTool(), tool],
             llm=llm
         )
 
