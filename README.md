@@ -54,7 +54,10 @@ This project now includes a **Streamlit UI** for running the CrewAI-based stock 
 Go to the root folder, 
 ```bash
 $ streamlit run ui.py
+
 ```
+Adding a Funtion calling for searching stocks
+Now you can search for company and it shows the best matches for company names. Next I will add stock prices 
 
 ## Understanding Your Crew
 
