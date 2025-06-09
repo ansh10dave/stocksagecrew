@@ -33,7 +33,3 @@ def run_stock_check(user_prompt: str):
     results = get_stock_symbol(company.strip())
     return company, results
 
-# Example usage:
-user_prompt = "How is Nvidia doing?"
-a=run_stock_check(user_prompt)
-print(a)
