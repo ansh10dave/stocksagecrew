@@ -32,12 +32,52 @@ llm = LLM(model="ollama/llama3.2-vision11b", base_url="http://localhost:11434")
 StockSageCrew is a GenAI-powered intelligent stock news scanner and explainer built using CrewAI. It automates the process of:
 
     🔎 Scanning the latest financial news from multiple online sources
-
     🧠 Analyzing and understanding the context of market-moving stories
-
     🗣️ Explaining the significance of top stock-related news in plain English
 
 It uses a multi-agent approach to simulate a team of financial analysts powered by LLMs (Ollama/LLaMA3), configured through agents.yaml and tasks.yaml.
+
+## 🖥️ Streamlit UI Integration
+
+This project now includes a Streamlit UI for interacting with the CrewAI-based stock assistant and displaying results interactively.
+Features
+
+    Company Name Extraction from user input using Ollama LLM
+    Stock Symbol Search using Alpha Vantage API
+    Real-time Stock Quote Retrieval via Alpha Vantage's Global Quote API
+    Interactive Real-time Stock Charts embedded using TradingView’s free widget (no API key required)
+    Clean display of company matches and stock details
+
+### 🔧 How to Run the Streamlit App
+Go to the root folder, 
+```bash
+$ streamlit run ui.py
+
+```
+Usage
+
+    Enter a company's name or query about its stock in the input box.
+
+    Click Check to get company matches and the latest stock data.
+
+    View interactive charts for the stock that support time range selection (1m, 6m, 1y, 5y, etc.) powered by TradingView.
+
+## Functionality Highlights
+
+Ollama LLM Usage
+
+    Extracts company names from natural language prompts.
+    Connects to your locally running Ollama server (http://localhost:11434/api/generate).
+
+Alpha Vantage API Integration
+
+    Searches for stock symbols matching the extracted company name.
+    Fetches real-time stock quote data (price, open, high, low, volume, etc.).
+
+Interactive Stock Chart
+
+    Uses TradingView’s free iframe widget for embedding professional-grade interactive charts.
+    No need for additional API keys or backend integration for chart rendering.
 
 ## Running the Project
 
@@ -46,18 +86,7 @@ To kickstart your crew of AI agents and begin task execution, run this from the 
 ```bash
 $ crewai run
 ```
-## 🖥️ Streamlit UI Integration
 
-This project now includes a **Streamlit UI** for running the CrewAI-based stock news scanner and displaying the results interactively.
-
-### 🔧 How to Run the Streamlit App
-Go to the root folder, 
-```bash
-$ streamlit run ui.py
-
-```
-Adding a Funtion calling for searching stocks
-Now you can search for company and it shows the best matches for company names. Next I will add stock prices 
 
 ## Understanding Your Crew
 
