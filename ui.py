@@ -26,47 +26,28 @@ if st.button("Check"):
     if user_input:
         with st.spinner("Getting stock data..."):
             try:
-                company, result = run_stock_check(user_input)
+                company, display, symbol, stock_info = run_stock_check(user_input)
                 st.subheader(f"🔍 Results for: {company.strip()}")
-                if result:
-                    cleaned_results = []
-                    for entry in result:
-                        if "— Region:" in entry:
-                            display_part = entry.split(", Match Score")[0].strip()
-                            cleaned_results.append(display_part)
-                            st.markdown(f"- {display_part}")
-                        else:
-                            print("No matches")
+                if display:
+                    for entry in display:
+                        st.markdown(f"- {entry}")
                 else:
                     st.warning("No matches found.")
+                if stock_info:
+                    st.subheader("📈 Stock Information")
+                    quote = stock_info.get("Global Quote", {})
+                    st.write(f"**Symbol:** {quote.get('01. symbol', 'N/A')}")
+                    st.write(f"**Price:** ${quote.get('05. price', 'N/A')}")
+                    st.write(f"**Change:** {quote.get('09. change', 'N/A')}")
+                    st.write(f"**Change Percent:** {quote.get('10. change percent', 'N/A')}")
+                    st.write(f"**Latest Trading Day:** {quote.get('07. latest trading day', 'N/A')}")
+                else:
+                    st.warning("No stock information available.")
             except Exception as e:
                 st.error(f"❌ Error: {e}")
-
-            #     # Check that result is a dict and has 'bestMatches'
-            #     if isinstance(result, dict) and result.get("bestMatches"):
-            #         best_matches = result["bestMatches"]
-            #         if best_matches:
-            #             for match in best_matches:
-            #                 symbol = match.get("1. symbol", "N/A")
-            #                 name = match.get("2. name", "N/A")
-            #                 region = match.get("4. region", "N/A")
-            #                 currency = match.get("8. currency", "N/A")
-            #                 match_score = match.get("9. matchScore", "N/A")
-
-            #                 st.markdown(f"""
-            #                 **Symbol:** `{symbol}`  
-            #                 **Name:** {name}  
-            #                 **Region:** {region}  
-            #                 **Currency:** {currency}  
-            #                 **Match Score:** {match_score}
-            #                 """)
-            #                 st.markdown("---")
-            #         else:
-            #             st.warning("No matches found.")
-            #     else:
-            #         st.warning("No results or unexpected response format.")
-            # except Exception as e:
-            #     st.error(f"❌ Error: {e}")
     else:
         st.warning("Please enter a prompt.")
+
+
+
 
