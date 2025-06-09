@@ -29,8 +29,14 @@ if st.button("Check"):
                 company, result = run_stock_check(user_input)
                 st.subheader(f"🔍 Results for: {company.strip()}")
                 if result:
+                    cleaned_results = []
                     for entry in result:
-                        st.markdown(f"- {entry}")
+                        if "— Region:" in entry:
+                            display_part = entry.split(", Match Score")[0].strip()
+                            cleaned_results.append(display_part)
+                            st.markdown(f"- {display_part}")
+                        else:
+                            print("No matches")
                 else:
                     st.warning("No matches found.")
             except Exception as e:
