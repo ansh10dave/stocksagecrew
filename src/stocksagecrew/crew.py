@@ -13,7 +13,7 @@ import requests
 
 ########### LLM ############################
 llm = LLM(
-    model = "ollama/llama3.2-vision:11b",
+    model = "ollama/qwen3:4b",
     base_url = "http://localhost:11434", 
 )
 
