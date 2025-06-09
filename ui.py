@@ -6,6 +6,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 print("Python executable:", sys.executable)
 from stocksagecrew.main import run
 from stocksagecrew.search_stock import run_stock_check
+import streamlit.components.v1 as components 
 
 st.title("Stock News Scanner - Streaming Output") 
 
@@ -41,12 +42,24 @@ if st.button("Check"):
                     st.write(f"**Change:** {quote.get('09. change', 'N/A')}")
                     st.write(f"**Change Percent:** {quote.get('10. change percent', 'N/A')}")
                     st.write(f"**Latest Trading Day:** {quote.get('07. latest trading day', 'N/A')}")
+                    def show_tradingview_chart(symbol: str):
+                        tradingview_html = f"""
+                        <iframe src="https://www.tradingview.com/widgetembed/?symbol={symbol}&interval=D&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=light&style=1&timezone=Etc/UTC&withdateranges=1&hideideas=1"
+                        width="100%" height="500" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+                        """
+                        components.html(tradingview_html, height=500)
+
+                    st.subheader(f"Live Stock Chart for {company}")
+                    show_tradingview_chart(symbol)
+
                 else:
                     st.warning("No stock information available.")
+
             except Exception as e:
                 st.error(f"❌ Error: {e}")
     else:
         st.warning("Please enter a prompt.")
+
 
 
 
