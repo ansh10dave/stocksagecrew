@@ -51,6 +51,10 @@ if st.button("Check stock info and get news"):
                     st.subheader("Latest news")
                     with st.spinner("Fetching news..."):
                         articles = get_news_sentiment(symbol.upper(), limit=2)
+                        target_ticker = symbol.upper()
+                        articles = [
+                            article for article in articles if any(t.get("ticker") == target_ticker for t in article.get("ticker_sentiment", []))
+                               ]
                         articles = articles[:num_articles]
                         
                     if not articles:
