@@ -58,9 +58,12 @@ Usage
 
     Enter a company's name or query about its stock in the input box.
 
-    Click Check to get company matches and the latest stock data.
+    Click Check and get news to get company matches and the latest stock data. It also returns latest and relevant news about the company.
 
     View interactive charts for the stock that support time range selection (1m, 6m, 1y, 5y, etc.) powered by TradingView.
+
+    It shows news and sentiment from the alpha vantage (alpha intelligence api)
+	
 
 ## Functionality Highlights
 
